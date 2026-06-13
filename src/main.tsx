@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <ThemeProvider defaultTheme="dark" storageKey="movie-hub-theme">
+      <ThemeProvider defaultTheme="light" storageKey="movie-hub-theme">
         <QueryProvider>
           <App />
         </QueryProvider>
