@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// In Vite, environment variables are accessed via import.meta.env
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const apiClient = () => {
@@ -13,13 +12,20 @@ const apiClient = () => {
 
     client.interceptors.request.use(
         async (config) => {
-            // Retrieve token from sessionStorage
-            const userStr = sessionStorage.getItem('user');
-            const token = userStr ? JSON.parse(userStr)?.token : null;
-            
-            if (token) {
-                config.headers.Authorization = `Bearer ${token}`;
+            // Use the TMDB Read Access Token by default
+            const tmdbToken = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
+            if (tmdbToken) {
+                config.headers.Authorization = `Bearer ${tmdbToken}`;
             }
+
+            // If a specific user token exists in session, it will override the default
+            const userStr = sessionStorage.getItem('user');
+            const userToken = userStr ? JSON.parse(userStr)?.token : null;
+
+            if (userToken) {
+                config.headers.Authorization = `Bearer ${userToken}`;
+            }
+
             return config;
         },
         (error) => Promise.reject(error),
@@ -27,15 +33,7 @@ const apiClient = () => {
 
     client.interceptors.response.use(
         (response) => response,
-        (error) => {
-            if (error.response?.status === 401 && error.config?.url !== '/') {
-                console.error('Unauthorized or token expired. Logging out...');
-                sessionStorage.clear();
-                // Redirecting to home/login
-                window.location.href = '/';
-            }
-            return Promise.reject(error);
-        },
+        (error) => Promise.reject(error),
     );
 
     return client;
