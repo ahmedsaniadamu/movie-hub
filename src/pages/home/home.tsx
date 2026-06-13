@@ -48,7 +48,7 @@ export default function Home() {
         const nextParams = new URLSearchParams(searchParams);
         nextParams.set("page", newPage.toString());
         setSearchParams(nextParams);
-        document.querySelector('.movie-container').scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelector('.movie-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const { data: genresData } = useGetGenres();
