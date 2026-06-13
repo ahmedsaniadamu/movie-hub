@@ -11,7 +11,7 @@ export default function App() {
   return (
     <SidebarProvider>
       <div className="flex h-screen w-full bg-background text-foreground overflow-hidden">
-        {!isDetailsPage && <AppSidebar onCategoryChange={() => {}} />}
+        {!isDetailsPage && <AppSidebar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<MovieDetails />} />

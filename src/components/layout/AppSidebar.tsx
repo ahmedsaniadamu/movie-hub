@@ -21,7 +21,7 @@ const menuItems = [
   { title: "Upcoming", icon: Calendar, category: "upcoming" },
 ];
 
-export function AppSidebar({ onCategoryChange }: { onCategoryChange: (cat: string) => void }) {
+export function AppSidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const activeCategory = searchParams.get("category") || "now_playing";
@@ -32,7 +32,6 @@ export function AppSidebar({ onCategoryChange }: { onCategoryChange: (cat: strin
     } else {
       setSearchParams({ category: cat });
     }
-    onCategoryChange(cat);
   };
 
   return (
