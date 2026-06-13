@@ -6,63 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { MovieSection } from "../home/sections/movie-section";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import MovieDetailsSkeleton from "./sections/movie-skeleton";
 
-function MovieDetailsSkeleton() {
-    return (
-        <div className="p-4 sm:p-8 max-w-[1400px] mx-auto space-y-12 animate-in fade-in duration-500">
-            <Skeleton className="h-10 w-24 rounded-lg" />
+const MovieDetails = () => {
 
-            <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-12 items-start">
-                {/* Poster Skeleton */}
-                <Skeleton className="aspect-[2/3] w-full rounded-3xl" />
-
-                {/* Info Skeleton */}
-                <div className="space-y-8">
-                    <div className="space-y-4">
-                        <Skeleton className="h-16 w-3/4 sm:h-20" />
-                        <div className="flex gap-6">
-                            <Skeleton className="h-6 w-20" />
-                            <Skeleton className="h-6 w-24" />
-                            <Skeleton className="h-6 w-16" />
-                        </div>
-                    </div>
-
-                    <div className="flex gap-4">
-                        <Skeleton className="h-20 w-48 rounded-2xl" />
-                        <Skeleton className="h-14 w-44 rounded-2xl" />
-                    </div>
-
-                    <div className="space-y-4">
-                        <Skeleton className="h-8 w-32" />
-                        <div className="space-y-2">
-                            <Skeleton className="h-6 w-full" />
-                            <Skeleton className="h-6 w-full" />
-                            <Skeleton className="h-6 w-2/3" />
-                        </div>
-                    </div>
-
-                    <div className="space-y-4">
-                        <Skeleton className="h-8 w-24" />
-                        <div className="flex gap-3">
-                            <Skeleton className="h-10 w-24 rounded-full" />
-                            <Skeleton className="h-10 w-28 rounded-full" />
-                            <Skeleton className="h-10 w-20 rounded-full" />
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 pt-8 border-t border-border">
-                        <div className="space-y-2"><Skeleton className="h-4 w-24" /> <Skeleton className="h-6 w-32" /></div>
-                        <div className="space-y-2"><Skeleton className="h-4 w-24" /> <Skeleton className="h-6 w-32" /></div>
-                        <div className="space-y-2"><Skeleton className="h-4 w-24" /> <Skeleton className="h-6 w-48" /></div>
-                        <div className="space-y-2"><Skeleton className="h-4 w-24" /> <Skeleton className="h-6 w-32" /></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-export default function MovieDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -88,7 +36,7 @@ export default function MovieDetails() {
     };
 
     return (
-        <main className="flex-1 overflow-y-auto no-scrollbar relative">
+        <main className="flex-1 overflow-y-auto md:px-16 max-w-7xl mx-auto no-scrollbar relative">
             {/* Backdrop Image */}
             <div className="absolute top-0 left-0 w-full h-[50vh] -z-10 opacity-20 overflow-hidden">
                 <img
@@ -100,14 +48,17 @@ export default function MovieDetails() {
             </div>
 
             <div className="p-4 sm:p-8 max-w-[1400px] mx-auto space-y-12">
-                <Button
-                    variant="ghost"
-                    onClick={() => navigate(-1)}
-                    className="gap-2 hover:bg-brand/10 hover:text-brand transition-colors mb-4"
-                >
-                    <ChevronLeft className="w-5 h-5" />
-                    Back
-                </Button>
+                <div className="flex items-center justify-between mb-4">
+                    <Button
+                        variant="ghost"
+                        onClick={() => navigate(-1)}
+                        className="gap-2 hover:bg-brand/10 hover:text-brand transition-colors"
+                    >
+                        <ChevronLeft className="w-5 h-5" />
+                        Back
+                    </Button>
+                    <ThemeToggle />
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-12 items-start">
                     {/* Left Column: Poster */}
@@ -120,7 +71,7 @@ export default function MovieDetails() {
                         <img
                             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                             alt={movie.title}
-                            className="rounded-3xl shadow-2xl w-full border border-border group-hover:border-brand/50 transition-colors"
+                            className="rounded-3xl shadow-2xl w-full transition-colors"
                         />
                     </motion.div>
 
@@ -240,3 +191,5 @@ export default function MovieDetails() {
         </main>
     );
 }
+
+export default MovieDetails;

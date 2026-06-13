@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { MoviePagination } from "@/components/movie/MoviePagination";
 
 import { useSearchParams } from "react-router";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function Home() {
 
@@ -68,17 +69,20 @@ export default function Home() {
                         setSearch={setSearchQuery}
                     />
                 </div>
-                <Button
-                    variant="outline"
-                    className={cn(
-                        "h-11 px-4 gap-2 rounded-xl group hover:border-brand transition-all",
-                        isFilterOpen && "border-brand bg-brand/5"
-                    )}
-                    onClick={() => setIsFilterOpen(!isFilterOpen)}
-                >
-                    <Filter className={cn("w-4 h-4 group-hover:text-brand", isFilterOpen && "text-brand")} />
-                    <span className="hidden sm:inline">Filters</span>
-                </Button>
+                <div className="flex items-center gap-2">
+                    <ThemeToggle />
+                    <Button
+                        variant="outline"
+                        className={cn(
+                            "h-11 px-4 gap-2 rounded-xl group hover:border-brand transition-all",
+                            isFilterOpen && "border-brand bg-brand/5"
+                        )}
+                        onClick={() => setIsFilterOpen(!isFilterOpen)}
+                    >
+                        <Filter className={cn("w-4 h-4 group-hover:text-brand", isFilterOpen && "text-brand")} />
+                        <span className="hidden sm:inline">Filters</span>
+                    </Button>
+                </div>
             </header>
 
             <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>

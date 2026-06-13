@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# Movie Hub  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Movie Hub is a modern movie discovery dashboard built for a frontend engineering assessment. It features a sleek, responsive UI with real-time movie data fetching, advanced filtering, and a premium dark mode experience.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Modern Dashboard**: A clean and intuitive layout showcasing popular, top-rated, and upcoming movies.
+- **Search & Discovery**: Real-time debounced search functionality to find any movie in the TMDb database.
+- **Advanced Filtering**: Filter movies by genre with dynamic refetching and state synchronization.
+- **Rich Movie Details**: Comprehensive details for each movie, including:
+  - Cast and Director information.
+  - Budget and Revenue breakdown.
+  - Languages and Genre badges.
+  - Interactive "Similar Movies" section.
+- **Dark Mode**: A full-featured dark/light mode toggle with system preference support and persistent state.
+- **Premium UX**:
+  - **Skeleton Loaders**: Custom loading states that prevent layout shift.
+  - **Framer Motion Animations**: Smooth page transitions and element entry effects.
+  - **URL-based State**: Filters and categories are synced with the URL for shareability.
+  - **Responsive Design**: Mobile-optimized with a slide-out sidebar.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Core**: [React.js](https://react.dev/) (Vite)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **State Management & Data Fetching**: [TanStack Query](https://tanstack.com/query/latest) (React Query)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Routing**: [React Router v7](https://reactrouter.com/)
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **API**: [TMDb API](https://developer.themoviedb.org/docs)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd movie-hub
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure Environment Variables:
+   Create a `.env` file in the root directory and add your TMDb credentials:
+   ```env
+   VITE_API_BASE_URL=https://api.themoviedb.org/3
+   VITE_TMDB_ACCESS_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODMwMGUzZmI4NDUwNjlkYzUyYjY5MDJkN2U1YmVhMCIsIm5iZiI6MTc4MTMzNDkwOS45MjMsInN1YiI6IjZhMmQwMzdkZDY3ZDliY2JlNjYyYWZlNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bpxbOzb5Dj_J1MyJ_KfZltG_XwHuLwvA1NnpzAGxybA
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## 📁 Project Structure
+
+```text
+src/
+├── assets/             # Images and static assets
+├── components/         # Reusable UI and Layout components
+│   ├── layout/         # AppSidebar, Navbar, etc.
+│   ├── movie/          # MovieCard, MoviePagination, etc.
+│   ├── providers/      # ThemeProvider, QueryProvider, etc.
+│   └── ui/             # Shadcn and generic UI primitives
+├── hooks/              # Custom React hooks (useMovies, etc.)
+├── lib/                # Utilities and shared configurations
+├── pages/              # Page components (Home, MovieDetails)
+├── services/           # API abstraction layers (Axios config)
+└── App.tsx             # Root component and Routing
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌐 Live URL
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+[View Live Project](https://movie-hub123.vercel.app/)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```

@@ -36,7 +36,7 @@ export function AppSidebar({ onCategoryChange }: { onCategoryChange: (cat: strin
   };
 
   return (
-    <Sidebar className="border-r bg-white border-border">
+    <Sidebar className="border-r border-border">
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-2 font-bold text-xl text-brand">
           <img src={logo} alt="logo" className="w-42 h-20" />
